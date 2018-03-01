@@ -3,8 +3,8 @@
             [folio.subs :as subs]
             ))
 
-
-;; POSTS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Posts page
 (defn post [p]
   [:div.post-wrapper
     [:h1 "Subject"]
@@ -19,14 +19,19 @@
      (for [p @posts]
        ^{:key (:timestamp p)}[post p])]))
 
-;; about
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Creation page
 
 (defn create-panel []
   [:div "This is the Create Page."
    [:div [:a {:href "#/"} "go to Posts Page"]]])
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Main page components
 
-;; main
+(defn nav-bar
+  []
+  [:div "This represents the nav bar"])
 
 (defn- panels [panel-name]
   (case panel-name
@@ -39,4 +44,6 @@
 
 (defn main-panel []
   (let [active-panel (re-frame/subscribe [::subs/active-panel])]
-    [show-panel @active-panel]))
+    [:div.app-container
+      [nav-bar]
+      [show-panel @active-panel]]))
